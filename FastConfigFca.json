@@ -1,0 +1,10 @@
+{
+	"Language": "vi",
+	"PreKey": "",
+	"MainColor": "#9900FF",
+	"MainName": "[ AOKO BOT ]",
+	"Uptime": false,
+	"BroadCast": false,
+	"EncryptFeature": true,
+	"AutoRestartMinutes": 10
+}
