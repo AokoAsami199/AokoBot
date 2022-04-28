@@ -1,0 +1,26 @@
+{
+  "name": "Epe Ngânn",
+  "ID": "100074145106092",
+  "pet": [
+    {
+      "name": "Beedrill",
+      "type": "Bug",
+      "HP": "91.0",
+      "Attack": "126.0",
+      "Defense": "56.0",
+      "Speed": "105.0",
+      "coins": "32400.0",
+      "skill": [
+        "Swarm",
+        "Sniper"
+      ],
+      "images": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/master/images/pokedex/hires/015.png"
+    }
+  ],
+  "foods": [],
+  "solo": {
+    "win": 0,
+    "lose": 0,
+    "draw": 0
+  }
+}
