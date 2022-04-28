@@ -1,0 +1,210 @@
+{
+    "fishingrod": {
+        "rodType": 6,
+        "enchantRod": {},
+        "rodName": "Diamond fishing rod",
+        "cooldownTime": 10,
+        "durabilityDefault": 1200,
+        "durability": 675,
+        "moneyFix": 571,
+        "rateBroken": [
+            10,
+            250
+        ]
+    },
+    "inventory": [
+        {
+            "name": "Football Fish",
+            "rarity": "Uncommon",
+            "price": 250,
+            "size": [
+                4,
+                60
+            ],
+            "time": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23
+            ]
+        },
+        {
+            "name": "Frog",
+            "rarity": "Common",
+            "price": 12,
+            "size": [
+                12,
+                14
+            ],
+            "time": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23
+            ]
+        },
+        {
+            "name": "Sweetfish",
+            "rarity": "Uncommon",
+            "price": 90,
+            "size": [
+                23,
+                28
+            ],
+            "time": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23
+            ]
+        },
+        {
+            "name": "Horse Mackerel",
+            "rarity": "Very Common",
+            "price": 15,
+            "size": [
+                32,
+                38
+            ],
+            "time": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23
+            ]
+        },
+        {
+            "name": "Black Bass",
+            "rarity": "Very Common",
+            "price": 40,
+            "size": [
+                50,
+                100
+            ],
+            "time": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23
+            ]
+        },
+        {
+            "name": "Empty",
+            "size": 0,
+            "price": 0
+        },
+        {
+            "name": "Empty",
+            "size": 0,
+            "price": 0
+        },
+        {
+            "name": "Empty",
+            "size": 0,
+            "price": 0
+        },
+        {
+            "name": "Empty",
+            "size": 0,
+            "price": 0
+        }
+    ],
+    "lastTimeFishing": 1648205628,
+    "point": 407,
+    "totalMoney": 0,
+    "totalCatch": 5
+}
