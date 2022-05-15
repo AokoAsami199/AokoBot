@@ -12,26 +12,26 @@ module.exports.config = {
 module.exports.run = async function({ api, event, Threads }) {
     const logger = require("../../utils/log");
     if (!global.configModule[this.config.name].enable) return;
-    var formReport =  "=== Thông báo của bot ===" +
-                        "\n\n» Nhóm có ID: " + event.threadID +
-                        "\n»  Có hành động: {task}" +
-                        "\n» Hành động được tạo bởi người dùng có ID: " + event.author +
-                        "\n» " + Date.now() +" «",
+    var formReport =  "=== Bot Notification ===" +
+                        "\n\n» 🐸Thread mang ID: " + event.threadID +
+                        "\n» 🦄Hành động: {task}" +
+                        "\n» 🦄Hành động được tạo bởi userID: " + event.author +
+                        "\n» 🐸" + Date.now() +" «",
         task = "";
     switch (event.logMessageType) {
         case "log:thread-name": {
             const oldName = (await Threads.getData(event.threadID)).name || "Tên không tồn tại",
                     newName = event.logMessageData.name || "Tên không tồn tại";
-            task = "Người dùng thay đổi tên nhóm từ: '" + oldName + "' thành '" + newName + "'";
+            task = "⚔️Người dùng thay đổi tên nhóm từ: '" + oldName + "' thành '" + newName + "'";
             await Threads.setData(event.threadID, {name: newName});
             break;
         }
         case "log:subscribe": {
-            if (event.logMessageData.addedParticipants.some(i => i.userFbId == api.getCurrentUserID())) task = "Người dùng đã thêm bot vào một nhóm mới!";
+            if (event.logMessageData.addedParticipants.some(i => i.userFbId == api.getCurrentUserID())) task = "⚔️Người dùng đã thêm bot vào một nhóm mới!";
             break;
         }
         case "log:unsubscribe": {
-            if (event.logMessageData.leftParticipantFbId== api.getCurrentUserID()) task = "Người dùng đã kick bot ra khỏi nhóm!"
+            if (event.logMessageData.leftParticipantFbId== api.getCurrentUserID()) task = "⚔️Người dùng đã kick bot ra khỏi nhóm!"
             break;
         }
         default: 
