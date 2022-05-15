@@ -1,20 +1,32 @@
 module.exports.config = {
 	name: "rankup",
-	version: "1.0.1",
+	version: "1.0.2",
 	hasPermssion: 1,
-	credits: "Mirai Team",
-	description: "Thông báo rankup cho từng nhóm, người dùng",
+	credits: "Mirai Team mod by 723",
+	description: "Thông báo rankup random gif cho từng nhóm, người dùng",
 	commandCategory: "system",
 	dependencies: {
 		"fs-extra": ""
 	},
-	cooldowns: 1,
+	cooldowns: 5,
 	envConfig: {
 		autoUnsend: true,
-		unsendMessageAfter: 100
+		unsendMessageAfter: 5
 	}
 };
-
+module.exports.onLoad = () => {
+    const fs = require("fs-extra");
+    const request = require("request");
+    const dirMaterial = __dirname + `/cache/rankup/`;// Thư mục dow về
+    if (!fs.existsSync(dirMaterial + "cache")) fs.mkdirSync(dirMaterial, { recursive: true });
+    if (!fs.existsSync(dirMaterial + "rankup1.gif")) request /*kiem tra file neu k co tu dong down ve */ 
+    ("https://i.imgur.com/QrdwCAa.gif").pipe(fs.createWriteStream(dirMaterial + "rankup1.gif")); //link file & ten file khi luu ve
+    if (!fs.existsSync(dirMaterial + "rankup2.gif")) request /*kiem tra file neu k co tu dong down ve */ 
+    ("https://i.imgur.com/jFo6mha.gif").pipe(fs.createWriteStream(dirMaterial + "rankup2.gif")); //link file & ten file khi luu ve
+    if (!fs.existsSync(dirMaterial + "rankup3.gif")) request /*kiem tra file neu k co tu dong down ve */ 
+    ("https://i.imgur.com/RioclTB.gif").pipe(fs.createWriteStream(dirMaterial + "rankup3.gif")); //link file & ten file khi luu ve
+}
+// Có sẵn hàm dowload cho newbie không biết thêm gif
 module.exports.handleEvent = async function({ api, event, Currencies, Users, getText }) {
 	var {threadID, senderID } = event;
 	const { createReadStream, existsSync, mkdirSync } = global.nodemodule["fs-extra"];
@@ -45,9 +57,9 @@ module.exports.handleEvent = async function({ api, event, Currencies, Users, get
 		messsage = messsage
 			.replace(/\{name}/g, name)
 			.replace(/\{level}/g, level);
-			
+let random = Math.floor(Math.random() * 3) + 1;//random gif , có bao nhiêu thay sau dấu * bấy nhiêu . Thêm gif và đổi tên thành rankup1/2/3.gif
 		if (existsSync(__dirname + "/cache/rankup/")) mkdirSync(__dirname + "/cache/rankup/", { recursive: true });
-		if (existsSync(__dirname + `/cache/rankup/rankup.gif`)) arrayContent = { body: messsage, attachment: createReadStream(__dirname + `/cache/rankup/rankup.gif`), mentions: [{ tag: name, id: senderID }] };
+		if (existsSync(__dirname + `/cache/rankup/rankup${random}.gif`)) arrayContent = { body: messsage, attachment: createReadStream(__dirname + `/cache/rankup/rankup${random}.gif`), mentions: [{ tag: name, id: senderID }] };
 		else arrayContent = { body: messsage, mentions: [{ tag: name, id: senderID }] };
 		const moduleName = this.config.name;
 		api.sendMessage(arrayContent, threadID, async function (error, info){
@@ -67,13 +79,13 @@ module.exports.languages = {
 		"off": "tắt",
 		"on": "bật",
 		"successText": "thành công thông báo rankup!",
-		"levelup": "⋙Thăng Cấp {level}⋘\n\nHãy cố gắng chơi đá để đạt thành tích cao nhé {name} 🥳🎉"
+		"levelup": "𝓛𝓮𝓿𝓮𝓵 𝓬𝓪̀𝓸 𝓹𝓱𝓲́𝓶 𝓬𝓾̉𝓪 {name} đ𝓪̃ đ𝓪̣𝓽 𝓽𝓸̛́𝓲 đ𝓲̉𝓷𝓱 𝓬𝓪𝓸 𝓵𝓮𝓿𝓮𝓵 {level}"
 	},
 	"en": {
 		"on": "on",
 		"off": "off",
 		"successText": "success notification rankup!",
-		"levelup": "{name}, fuck the dog level {level}",
+		"levelup": "{name}, your keyboard hero level has reached level {level}",
 	}
 }
 

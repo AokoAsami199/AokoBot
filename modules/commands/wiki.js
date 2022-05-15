@@ -1,13 +1,13 @@
 module.exports.config = {
-    name: "wiki",
-    version: "1.0.1",
-    hasPermssion: 0,
-    credits: "Mirai Team",
-    description: "Tìm mọi thông tin cần biêt thông qua Wikipedia",
-    commandCategory: "study",
-    usages: "[en] [thông tin cần tìm kiếm]",
-    cooldowns: 1,
-    dependencies: {
+	name: "wiki",
+	version: "1.0.1",
+	hasPermssion: 0,
+	credits: "Mirai Team",
+	description: "Tìm mọi thông tin cần biêt thông qua Wikipedia",
+	commandCategory: "study",
+	usages: "[en] [thông tin cần tìm kiếm]",
+	cooldowns: 1,
+	dependencies: {
         "wikijs": ""
     }
 }

@@ -1,12 +1,11 @@
-const fs = global.nodemodule["fs-extra"];
 module.exports.config = {
-	name: "rank",
+	name: "rankv2",
 	version: "1.0.0",
 	hasPermssion: 0,
-	credits: "Siêu Đáng Yêu",
-	description: "Rank được kèm theo ảnh ngẫu nhiên ><, tự tải ảnh về khi load rank này",
+	credits: "CataliCS",
+	description: "Lấy rank hiện tại của bạn trên hệ thống bot kèm khung theo level của bạn, remake rank_card from canvacord",
 	commandCategory: "Nhóm",
-	cooldowns: 5,
+	cooldowns: 20,
 	dependencies: {
 		"fs-extra": "",
 		"path": "",
@@ -15,29 +14,6 @@ module.exports.config = {
 		"canvas": ""
 	}
 };
-
-module.exports.onLoad = async function () {
-	const { resolve } = global.nodemodule["path"];
-    const { existsSync, mkdirSync } = global.nodemodule["fs-extra"];
-    const { downloadFile } = global.utils;
-	const path = resolve(__dirname, "cache" );
-    if (!existsSync(path)) mkdirSync(path, { recursive: true });
-	if (!existsSync(resolve(__dirname, 'cache', 'rankcard1.png'))) await downloadFile ("https://i.imgur.com/ciPIvFk.png", resolve(__dirname, 'cache', 'rankcard1.png'));
-  if (!existsSync(resolve(__dirname, 'cache', 'rankcard2.png'))) await downloadFile("https://i.imgur.com/8ghhGmd.png", resolve(__dirname, 'cache', 'rankcard2.png'));
-  if (!existsSync(resolve(__dirname, 'cache', 'rankcard3.png'))) await downloadFile("https://i.imgur.com/y9To0p6.png", resolve(__dirname, 'cache', 'rankcard3.png'));
-  //muốn thêm ảnh thì cứ làm như trên nhé lên web ibb.co hoặc i.imgur.com để up ảnh rồi lấy đường link add dô như vậy là tự tải ảnh về cache nhé!!!! tối đa 30 ảnh
-}
-
-//random color 
-function getRandomColor() {
-  	var letters = '0123456789ABCDEF';
- 	var color = '#';
-  	for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-}
-
 
 module.exports.makeRankCard = async (data) => {    
     /*
@@ -55,23 +31,20 @@ module.exports.makeRankCard = async (data) => {
 
     const { id, name, rank, level, expCurrent, expNextLevel } = data;
 
-	Canvas.registerFont(__root + "/regular-font.ttf", {
+	Canvas.registerFont(__root + "/VNBAHAB.TTF", {
 		family: "Manrope",
 		weight: "regular",
 		style: "normal"
 	});
-	Canvas.registerFont(__root + "/bold-font.ttf", {
+	Canvas.registerFont(__root + "/VNBAHAB.TTF", {
 		family: "Manrope",
 		weight: "bold",
 		style: "normal"
 	});
-//random rankcard by Siêu Đáng Yêu ,png by ngô đức hiển(xin vui lòng giữ credit)
+
 	const pathCustom = path.resolve(__dirname, "cache", "customrank");
 	var customDir = fs.readdirSync(pathCustom);
-	let random = Math.floor(Math.random() * 3) + 1;
-	    var dirImage = __root + "/rankcard" + random + ".png";
-
-
+	var dirImage = __root + "/rankcard.png";
 	customDir = customDir.map(item => item.replace(/\.png/g, ""));
 
 	for (singleLimit of customDir) {
@@ -98,7 +71,7 @@ module.exports.makeRankCard = async (data) => {
 	var expWidth = (expCurrent * 615) / expNextLevel;
 	if (expWidth > 615 - 18.5) expWidth = 615 - 18.5;
 	
-	let avatar = await request.get(`https://graph.facebook.com/${id}/picture?width=512&height=512&access_token=1073911769817594|aa417da57f9e260d1ac1ec4530b417de`);
+	let avatar = await request.get(`https://graph.facebook.com/${id}/picture?width=512&height=512&access_token=170440784240186|bc82258eaaf93ee5b9f577a8d401bfc9`);
 
 	avatar = await this.circle(avatar.body);
 
@@ -109,36 +82,36 @@ module.exports.makeRankCard = async (data) => {
 	ctx.drawImage(await Canvas.loadImage(avatar), 45, 50, 180, 180);
 
 	ctx.font = `bold 36px Manrope`;
-	ctx.fillStyle = getRandomColor();
+	ctx.fillStyle = "#FFFFFF";
 	ctx.textAlign = "start";
 	ctx.fillText(name, 270, 164);
 	ctx.font = `36px Manrope`;
-	ctx.fillStyle = getRandomColor();
+	ctx.fillStyle = "#FFFFFF";
 	ctx.textAlign = "center";
 
 	ctx.font = `bold 32px Manrope`;
-	ctx.fillStyle = getRandomColor();
+	ctx.fillStyle = "#FFFFFF";
 	ctx.textAlign = "end";
 	ctx.fillText(level, 934 - 55, 82);
-	ctx.fillStyle = getRandomColor();
+	ctx.fillStyle = "#FFFFFF";
 	ctx.fillText("Lv.", 934 - 55 - ctx.measureText(level).width - 10, 82);
 
 	ctx.font = `bold 32px Manrope`;
-	ctx.fillStyle = getRandomColor();
+	ctx.fillStyle = "#FFFFFF";
 	ctx.textAlign = "end";
 	ctx.fillText(rank, 934 - 55 - ctx.measureText(level).width - 16 - ctx.measureText(`Lv.`).width - 25, 82);
-	ctx.fillStyle = getRandomColor();
+	ctx.fillStyle = "#FFFFFF";
 	ctx.fillText("#", 934 - 55 - ctx.measureText(level).width - 16 - ctx.measureText(`Lv.`).width - 16 - ctx.measureText(rank).width - 16, 82);
 
 	ctx.font = `bold 26px Manrope`;
-	ctx.fillStyle = getRandomColor();
+	ctx.fillStyle = "#FFFFFF";
 	ctx.textAlign = "start";
 	ctx.fillText("/ " + expNextLevel, 710 + ctx.measureText(expCurrent).width + 10, 164);
-	ctx.fillStyle = getRandomColor();
+	ctx.fillStyle = "#FFFFFF";
 	ctx.fillText(expCurrent, 710, 164);
 
 	ctx.beginPath();
-	ctx.fillStyle = getRandomColor();
+	ctx.fillStyle = "#4283FF";
 	ctx.arc(257 + 18.5, 147.5 + 18.5 + 36.25, 18.5, 1.5 * PI, 0.5 * PI, true);
 	ctx.fill();
 	ctx.fillRect(257 + 18.5, 147.5 + 36.25, expWidth, 37.5);
@@ -175,12 +148,23 @@ module.exports.getInfo = async (uid, Currencies) => {
 	return { level, expCurrent, expNextLevel };
 }
 
+module.exports.onLoad = async function () {
+	const { resolve } = global.nodemodule["path"];
+    const { existsSync, mkdirSync } = global.nodemodule["fs-extra"];
+    const { downloadFile } = global.utils;
+	const path = resolve(__dirname, "cache", "customrank");
+    if (!existsSync(path)) mkdirSync(path, { recursive: true });
+
+    if (!existsSync(resolve(__dirname, 'cache', 'regular-font.ttf'))) await downloadFile("https://raw.githubusercontent.com/catalizcs/storage-data/master/rank/fonts/regular-font.ttf", resolve(__dirname, 'cache', 'regular-font.ttf'));
+	if (!existsSync(resolve(__dirname, 'cache', 'bold-font.ttf'))) await downloadFile("https://raw.githubusercontent.com/catalizcs/storage-data/master/rank/fonts/bold-font.ttf", resolve(__dirname, 'cache', 'bold-font.ttf'));
+	if (!existsSync(resolve(__dirname, 'cache', 'rankcard.png'))) await downloadFile("https://raw.githubusercontent.com/catalizcs/storage-data/master/rank/rank_card/rankcard.png", resolve(__dirname, 'cache', 'rankcard.png'));
+}
+
 module.exports.run = async ({ event, api, args, Currencies, Users }) => {
 	const fs = global.nodemodule["fs-extra"];
 	
 	let dataAll = (await Currencies.getAll(["userID", "exp"]));
 	const mention = Object.keys(event.mentions);
-  const name = global.data.userName.get(event.senderID) || await Users.getNameUser
 
 	dataAll.sort((a, b) => {
 		if (a.exp > b.exp) return -1;
@@ -194,7 +178,7 @@ module.exports.run = async ({ event, api, args, Currencies, Users }) => {
 		const point = await this.getInfo(event.senderID, Currencies);
 		const timeStart = Date.now();
 		let pathRankCard = await this.makeRankCard({ id: event.senderID, name, rank, ...point })
-		return api.sendMessage({body: `👑𝙉𝘼𝙈𝙀: ${name}\n🏆𝙏𝙤𝙥 𝙘𝙝𝙞𝙚̂́𝙣 𝙩𝙪̛𝙤̛́𝙣𝙜: ${rank}`, attachment: fs.createReadStream(pathRankCard, {'highWaterMark': 128 * 1024}) }, event.threadID, () => fs.unlinkSync(pathRankCard), event.messageID);
+		return api.sendMessage({body: `⚡️${name} - ⚡️Top ${rank}`, attachment: fs.createReadStream(pathRankCard, {'highWaterMark': 128 * 1024}) }, event.threadID, () => fs.unlinkSync(pathRankCard), event.messageID);
 	}
 	if (mention.length == 1) {
 		const rank = dataAll.findIndex(item => parseInt(item.userID) == parseInt(mention[0])) + 1;
@@ -202,7 +186,7 @@ module.exports.run = async ({ event, api, args, Currencies, Users }) => {
 		if (rank == 0) return api.sendMessage("Bạn hiện không có trong cơ sở dữ liệu nên không thể thấy thứ hạng của mình, vui lòng thử lại sau 5 giây.", event.threadID, event.messageID);
 		let point = await this.getInfo(mention[0], Currencies);
 		let pathRankCard = await this.makeRankCard({ id: mention[0], name, rank, ...point })
-		return api.sendMessage({ attachment: fs.createReadStream(pathRankCard) }, event.threadID, () => fs.unlinkSync(pathRankCard), event.messageID);
+		return api.sendMessage({body: `⚡️${name} - ⚡️Top ${rank}`, attachment: fs.createReadStream(pathRankCard) }, event.threadID, () => fs.unlinkSync(pathRankCard), event.messageID);
 	}
 	if (mention.length > 1) {
 		for (const userID of mention) {
@@ -211,7 +195,7 @@ module.exports.run = async ({ event, api, args, Currencies, Users }) => {
 			if (rank == 0) return api.sendMessage("Bạn hiện không có trong cơ sở dữ liệu nên không thể thấy thứ hạng của mình, vui lòng thử lại sau 5 giây.", event.threadID, event.messageID);
 			let point = await this.getInfo(userID, Currencies);
 			let pathRankCard = await this.makeRankCard({ id: userID, name, rank, ...point })
-			return api.sendMessage({ attachment: fs.createReadStream(pathRankCard) }, event.threadID, () => fs.unlinkSync(pathRankCard), event.messageID);
+			return api.sendMessage({body: `⚡️${name} - ⚡️Top ${rank}`, attachment: fs.createReadStream(pathRankCard) }, event.threadID, () => fs.unlinkSync(pathRankCard), event.messageID);
 		}
 	}
 }

@@ -1,9 +1,9 @@
 module.exports.config = {
-	name:"gai",
+	name:"mong",
 	version: "1.0.0",
 	hasPermssion: 0,
-	credits: "Hải mod 🐧 - api ảnh của chinhle 🌚",
-	description: "Random ảnh ghệ đic pư",
+	credits: "Toàn",
+	description: "Random video tiktok kênh snauzk",
 	commandCategory: "media",
 	cooldowns: 3
 };
@@ -11,14 +11,13 @@ module.exports.run = async ({ api, event,}) => {
 	const axios = require('axios');
 	const request = require('request');
 	const fs = require("fs");
-	axios.get('https://apitaoa-1.chinhle4447.repl.co/v1/gai').then(res => {
-	let ext = res.data.data.substring(res.data.data.lastIndexOf(".") + 1);
+	axios.get('https://randomlinkapi-1.toan1511.repl.co/getLink1').then(res => {//https://randomlinkapi-1.toan1511.repl.co/getLink1
+	let ext = res.data.url.substring(res.data.url.lastIndexOf(".") + 1);
 	let callback = function () {
-					api.sendMessage({
-                                                body: `《Ghệ đic pự》`,
-						attachment: fs.createReadStream(__dirname + `/cache/gai.${ext}`)
-					}, event.threadID, () => fs.unlinkSync(__dirname + `/cache/gai.${ext}`), event.messageID);
+					api.sendMessage({ body: `bổ mắt nhé`,
+						attachment: fs.createReadStream(__dirname + `/cache/a.${ext}`)
+					}, event.threadID, () => fs.unlinkSync(__dirname + `/cache/a.${ext}`), event.messageID);
 				};
-				request(res.data.data).pipe(fs.createWriteStream(__dirname + `/cache/gai.${ext}`)).on("close", callback);
+				request(res.data.url).pipe(fs.createWriteStream(__dirname + `/cache/a.${ext}`)).on("close", callback);
 			})
 }
